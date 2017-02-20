@@ -1,23 +1,21 @@
 /* global Module */
 
 /* Magic Mirror
- * Module: CurrentWeather
+ * Module: Domoticz
  *
- * By Michael Teeuw http://michaelteeuw.nl
- * MIT Licensed.
+ * By Mathias Arvidsson
  */
 
 Module.register("domoticz",{
 
-	// Default module config.
 	defaults: {
 		units: config.units,
-		updateInterval: 5000, // every 5 seconds
+		updateInterval: 5000,
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 		lang: config.language,
 
-		initialLoadDelay: 0, // 0 seconds delay
+		initialLoadDelay: 0,
 		retryDelay: 2500,
 
 		apiBase: "http://127.0.0.1",
@@ -31,7 +29,6 @@ Module.register("domoticz",{
 		],
 	},
 
-	// create a variable for the first upcoming calendaar event. Used if no location is specified.
 	firstEvent: false,
 	getStyles: function() {
 	    return ['font-awesome.css'];
@@ -58,7 +55,6 @@ Module.register("domoticz",{
 		for (var c in this.config.sensors) {
 			var sensor = this.config.sensors[c];
 			var newSensor = {idx:sensor.idx, symbolon:sensor.symbolon, symboloff:sensor.symboloff, status:"", sname:"",type:""};
-			//this.addSensor(sensor.idx, sensor.symbolon, sensor.symboloff);
 			console.log(sensor.idx);
 			this.sensors.push(newSensor);
 		}
@@ -72,7 +68,6 @@ console.log(this.sensors);
 		var wrapper = document.createElement("div");
 
 		if (!this.loaded) {
-			//wrapper.innerHTML = this.translate("LOADING");
 			wrapper.innerHTML = "Loading...";
 			wrapper.className = "dimmed light small";
 			return wrapper;
@@ -82,7 +77,6 @@ console.log(this.sensors);
 
 		for (var c in this.sensors) {
 			var sensor = this.sensors[c];
-			//this.addSensor(sensor.idx, sensor.symbolon, sensor.symboloff);
 			var sensorWrapper = document.createElement("tr");
 			sensorWrapper.className = "normal";
 
@@ -114,10 +108,6 @@ console.log(this.sensors);
 	},
 
 
-	/* updateDomo(compliments)
-	 * Requests new data from openweather.org.
-	 * Calls processJson on succesfull response.
-	 */
 	updateDomo: function() {
 		var i = 0;
 		for (var c in this.sensors) {
@@ -144,11 +134,6 @@ console.log(this.sensors);
 		}
 	},
 
-	/* processJson(data)
-	 * Uses the received data to set the various values.
-	 *
-	 * argument data object - Weather information received form openweather.org.
-	 */
 	processJson: function(data) {
 		console.log("****Parsing data: " + c + " " + data.result[0].Name);
 		if (!data) {
@@ -167,14 +152,8 @@ console.log(this.sensors);
 		
 		this.loaded = true;
 		this.updateDom(this.config.animationSpeed);
-		//this.sendNotification("CURRENTDOMOTICZ_DATA", {data: data});
 	},
 
-	/* scheduleUpdate()
-	 * Schedule next update.
-	 *
-	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
-	 */
 	scheduleUpdate: function(delay) {
 		console.log("Updating..");
 		var nextLoad = this.config.updateInterval;
