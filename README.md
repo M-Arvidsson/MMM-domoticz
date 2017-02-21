@@ -1,6 +1,8 @@
 # MMM-domoticz
 Domoticz module for <a href="https://magicmirror.builders/">MagicMirror2</a>.
 
+![alt tag](https://github.com/M-Arvidsson/MMM-domoticz/blob/master/mmm-domoticz.png)
+
 # Installation
 Create your own subfolder in "modules". In that subfolder, create a new subfolder a name it "domoticz". Copy domoticz.js to that folder (MagicMirror/modules/marvidsson/domoticz/domoticz.js).
 
