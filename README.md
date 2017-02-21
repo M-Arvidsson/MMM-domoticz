@@ -21,7 +21,7 @@ In config.js, add the following lines and change it to match your setup and sens
 						idx: "65", //Device IDX
 						symbolon: "fa fa-user", /font-awesome icon if device is On
 						symboloff: "fa fa-user-o", //font-awesome icon if device is Off (this will also be used if it is a temperature-de				
-          },
+          				},
 					{
 						idx: "539",
 						symbolon: "fa fa-circle-o-notch fa-spin",
@@ -40,3 +40,7 @@ In config.js, add the following lines and change it to match your setup and sens
 				],
 			}
 		},
+
+# Todo list
+- [ ] Config - Hide device when it's on or off
+- [ ] Config - Custom device title
