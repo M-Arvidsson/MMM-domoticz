@@ -25,6 +25,9 @@ Module.register("domoticz",{
 				idx: "1",
 				symbolon: "fa fa-user",
 				symboloff: "fa fa-user-o",
+				hiddenon: false,
+				hiddenoff: false,
+				customTitle: "",
 			},
 		],
 	},
@@ -54,7 +57,7 @@ Module.register("domoticz",{
 		this.sensors = [];
 		for (var c in this.config.sensors) {
 			var sensor = this.config.sensors[c];
-			var newSensor = {idx:sensor.idx, symbolon:sensor.symbolon, symboloff:sensor.symboloff, status:"", sname:"",type:""};
+			var newSensor = {idx:sensor.idx, symbolon:sensor.symbolon, symboloff:sensor.symboloff, hiddenon:sensor.hiddenon, hiddenoff:sensor.hiddenoff, customTitle:sensor.customTitle, status:"", sname:"",type:""};
 			console.log(sensor.idx);
 			this.sensors.push(newSensor);
 		}
@@ -77,6 +80,7 @@ console.log(this.sensors);
 
 		for (var c in this.sensors) {
 			var sensor = this.sensors[c];
+			if((sensor.status=="On" && sensor.hiddenon)||(sensor.status=="Off" && sensor.hiddenoff)) continue;
 			var sensorWrapper = document.createElement("tr");
 			sensorWrapper.className = "normal";
 
@@ -93,13 +97,13 @@ console.log(this.sensors);
 			titleTD.className = "title bright";
 			if(sensor.status=="Off") titleTD.className = "title light";
 			titleTD.innerHTML = sensor.sname;
+			if(typeof sensor.customTitle !== 'undefined') titleTD.innerHTML = sensor.customTitle;
 			sensorWrapper.appendChild(titleTD);
 
 			var statusTD = document.createElement('td');
 			statusTD.className = "time light";
 			statusTD.innerHTML = sensor.status;
 			sensorWrapper.appendChild(statusTD);
-
 
 			tableWrap.appendChild(sensorWrapper);
 		}
