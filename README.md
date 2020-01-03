@@ -19,7 +19,7 @@ In config.js, add the following lines and change it to match your setup and sens
 				sensors: [
 					{
 						idx: "65", //Device IDX
-						symbolon: "fa fa-user", /font-awesome icon if device is On
+						symbolon: "fa fa-user", //font-awesome icon if device is On
 						symboloff: "fa fa-user-o", //font-awesome icon if device is Off (this will also be used if it is a temperature-de
 						hiddenon: true, //true = hide if device is on (default: false)
 						hiddenoff: false, //frue = hide if device is off (default: false)
